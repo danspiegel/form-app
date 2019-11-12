@@ -1,0 +1,57 @@
+<form #myForm="ngForm" (submit)="onSubmit(myForm)" >
+  <div ngModelGroup="informacoes">
+    <label>
+      <p>Nome</p>
+      <input #nome="ngModel" type="text" name="nome" required minlength="3" maxlength="5" [(ngModel)]="informacoes.nome" />
+      <ul *ngIf="nome.dirty && nome.invalid">
+        <li *ngIf="nome.errors?.required">Campo é obrigatório</li>
+        <li *ngIf="nome.errors?.minlength">Mínimo de 3 caracteres</li>
+      </ul>
+    </label>
+    <label>
+      <p>Idade</p>
+      <input type="number" name="idade" [(ngModel)]="informacoes.idade" [disabled]="nome.invalid" />
+    </label>
+    <label>
+      <p>E-mail</p>
+      <input type="text" name="email" email [(ngModel)]="informacoes.email" />
+    </label>
+    <label>
+      <p>Confirmar E-mail</p>
+      <input type="text" name="confirmarEmail" [(ngModel)]="informacoes.confirmarEmail" />
+    </label>
+  </div>
+  <div ngModelGroup="endereco">
+    <label>
+      <p>CEP</p>
+      <input type="text" name="cep" ngModel #cep (blur)="getAddress(cep.value)" />
+    </label>
+    <label>
+      <p>Endereço</p>
+      <input type="text" name="logradouro" ngModel />
+    </label>
+    <label>
+      <p>Numero</p>
+      <input type="text" name="numero" ngModel />
+    </label>
+    <label>
+      <p>Complemento</p>
+      <input type="text" name="complemento" ngModel />
+    </label>
+    <label>
+      <p>Bairro</p>
+      <input type="text" name="bairro" ngModel />
+    </label>
+    <label>
+      <p>Cidade</p>
+      <input type="text" name="localidade" ngModel />
+    </label>
+    <label>
+      <p>Estado</p>
+      <input type="text" name="uf" ngModel />
+    </label>
+  </div>
+  <br/>
+  <br/>
+  <button type="submit">Enviar</button>
+</form>
